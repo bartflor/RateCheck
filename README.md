@@ -4,7 +4,7 @@
 * [Setup](#setup)
 
 ## General info
-This project is Spring web application, that allows to chceck exchange rates and gold price. Data came from NBP server is JSON format, provided from web API. You can check current prices, or plot history data from range available at NBP site. 
+This project is Spring web application, that allows to check exchange rates and gold price. Data came from NBP server is JSON format, provided from web API. You can check current prices, or plot history data from range available at NBP site. 
 	
 ## Technologies
 Project is created with:
