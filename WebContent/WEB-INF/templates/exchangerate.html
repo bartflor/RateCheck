@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}" />
+<title>Exchange rate</title>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>  
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>  
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+$(function () {
+	$("#chartContainer").CanvasJSChart({ 
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		animationEnabled: true,
+		title:{
+			text: 'NBP exchange rates of ' +/*[# th:if='${#strings.contains(#httpServletRequest.getParameter("currency_code"), "JPY")}']*/ '100 '+/*[/]*/ /*[[${#httpServletRequest.getParameter("currency_code")}]]*/ 
+		},
+		axisX: {
+			interval: 1,
+			intervalType: "month",
+			valueFormatString: "MMM YY"
+		},
+		axisY:{
+			title: "Price (in PLN)",
+			valueFormatString: "###.## zł",
+			//interval: 0.3,
+			//interlacedColor: "Gray"
+		},
+		data: [
+		{
+		type: "line",
+		markerType: "square",
+		xValueFormatString: "DD MMM YYYY",
+		yValueFormatString: "####.## PLN",
+		xValueType: "dataSeries",
+		color: "#F08080",
+		dataPoints: [
+			/*[# th:each="rate : ${RatesList}"]*/
+			{ x: new Date("[(${rate.date})]") , y: /*[[${rate.value}]]*/ },
+			/*[/]*/
+		]
+	}
+	]
+});
+
+});
+/*]]>*/
+</script>
+</head>
+<body>
+	<div th:insert="layout :: header"></div>
+
+<div id="chartContainer" style="width:100%; height:300px;"></div>
+<form action="exchangerate">
+		<table class="nostyle">
+			<tr>
+				<td>Start date:</td>
+				<td><input name="start" type="date"></td>
+				<td>Stop date:</td>
+				<td><input name="stop" type="date"></td>
+				<td>Currency:</td>
+				<td><select name="currency_code">
+						<option value="USD">US dollar</option>
+						<option value="EUR">Euro</option>
+						<option value="GBP">Pound Sterling</option>
+						<option value="JPY">Yen</option>
+				</select></td>
+				<td>Price</td>
+				<td><input id="ask" name="price" type="radio" value="ask"
+					checked /><label for="ask">Ask</label></td>
+				<td><input id="bid" name="price" type="radio" value="bid" /><label
+					for="bid">Bid</label>
+				</td>
+			</tr>
+			<tr>
+				<td><input value="Show rates" type="submit" /></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	
+		<div th:insert="layout :: footer"></div>
+	
+</body>
+</html>

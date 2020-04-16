@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/main.css}" />
+<title>Today rates</title>
+</head>
+<body>
+	<div th:insert="layout :: header"></div>
+	<table class = "rates">
+		<tr>
+			<th>Gold rate. Price for 1 gram:</th>
+			<th>
+				<p th:text="${rates.todayGoldRate.getValue()} +' PLN'">
+			</th>
+		</tr>
+	</table>
+	<table class="rates">
+		<tr>
+			<th>Currency name</th>
+			<th>Currency code</th>
+			<th>Exchange rate to PLN</th>
+		</tr>
+		<tr th:each="rate : ${rates.todayExchangeRates}">
+			<td><p th:text="${rate.currency}"></td>
+			<td><p th:text="${rate.code}"></td>
+			<td><p th:text="${rate.mid}"></td>
+		</tr>
+
+	</table>
+
+
+	<div th:insert="layout :: footer"></div>
+</body>
+</html>

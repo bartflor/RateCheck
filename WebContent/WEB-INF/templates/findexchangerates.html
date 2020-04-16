@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/main.css}" />
+<title>Exchange rates page</title>
+</head>
+<body>
+	<div th:insert="layout :: header"></div>
+
+	<h3 align="center">Choose range of exchange rates to plot</h3>
+	<p class="error" align ="center" th:if=${error} th:text=${error}/>
+	<form action="exchangerate">
+		<table>
+			<tr>
+				<td>Start date:</td>
+				<td><input name="start" type="date"></td>
+			</tr>
+			<tr>
+				<td>Stop date:</td>
+				<td><input name="stop" type="date"></td>
+			</tr>
+			<tr>	
+				<td>Currency:</td>
+				<td><select name="currency_code">
+						<option value="USD">US dollar</option>
+						<option value="EUR">Euro</option>
+						<option value="GBP">Pound Sterling</option>
+						<option value="JPY">Yen</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td><input id="ask" name="price" type="radio" value="ask" checked /><label for="ask">Ask</label> <br></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input id="bid" name="price" type="radio" value="bid" /><label
+					for="bid">Bid</label> <br></td>
+			</tr>
+			<tr>
+				<td><input value="Show rates" type="submit" /></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	<div th:insert="layout :: footer"></div>
+</body>
+</html>

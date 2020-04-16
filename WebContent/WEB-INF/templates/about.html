@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/main.css}" />
+<title>gold rate page</title>
+</head>
+<body>
+	<div th:insert="layout :: header"></div>
+	Application reads data from NBP server using web API described at <a href ="https://api.nbp.pl/"> their site</a>.<br>
+	Currency exchange rates available since 2 January 2002.<br>
+	Gold prices available since 2 January 2013.<br>
+	<div th:insert="layout :: footer"></div>
+</body>
+</html>

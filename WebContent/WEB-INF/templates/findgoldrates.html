@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/css/main.css}" />
+<title>gold rate page</title>
+</head>
+<body>
+	<div th:insert="layout :: header"></div>
+	
+	<h3 align="center">Choose range of gold rates to plot</h3>
+	<p class="error" align ="center" th:if=${error} th:text=${error}/>
+	<form action="goldrate">
+		<table>
+			<tr>
+				<td>Start date:</td>
+				<td><input name="start" type="date"></td>
+			</tr>
+			<tr>
+				<td>Stop date:</td>
+				<td><input name="stop" type="date"></td>
+			</tr>
+			<tr>
+				<td>Rate unit: </td>
+				<td><input id="gram" name="unit" type="radio" value="gram" checked/> <label for="gram">gram</label></td> 
+			</tr>
+			<tr>
+				<td></td>
+				<td><input id="ounce" name="unit" type="radio" value="ounce"/> <label for="ounce">ounce</label></td>
+			</tr>
+			<tr>
+				<td><input value="Show rates" type="submit" /></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+
+	<div th:insert="layout :: footer"></div>
+</body>
+</html>
