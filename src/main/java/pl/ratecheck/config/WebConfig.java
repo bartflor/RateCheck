@@ -60,5 +60,6 @@ public class WebConfig implements WebMvcConfigurer {
 //		registry.addConverter(new StringToLocalDateConverter());
 		registry.addConverter(new StringToGoldMassUnitEnumConverter());
 		registry.addConverter(new StringToCurrencyEnumConverter());
+		registry.addConverter(new StringToPriceTypeEnumConverter());
 	}
 }

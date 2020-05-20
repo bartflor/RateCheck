@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pl.ratecheck.model.CurrencyCode;
 import pl.ratecheck.model.ExchangeratesDao;
+import pl.ratecheck.model.PriceType;
 import pl.ratecheck.model.Rate;
 @Service
 public class ExchangerateService {
@@ -17,7 +18,7 @@ public class ExchangerateService {
 	public ExchangerateService() {
 	}
 
-	public List<? extends Rate> getExchangerateFromPeriod(LocalDate startDate, LocalDate stopDate, CurrencyCode currencyCode, String price) {
+	public List<? extends Rate> getExchangerateFromPeriod(LocalDate startDate, LocalDate stopDate, CurrencyCode currencyCode, PriceType price) {
 
 		return exchangerateDao.getRatesInDatesRange(startDate, stopDate, currencyCode, price);
 	}

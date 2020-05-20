@@ -18,7 +18,6 @@ public class GoldRateService {
 	}
 
 	public List<? extends Rate> getGoldRateFromPeriod(LocalDate startDate, LocalDate stopDate, GoldMassUnits unit) {
-		List<? extends Rate> rates= goldRateDao.getGoldRatesInDatesRange(startDate, stopDate, unit);
-		return rates;
+		return goldRateDao.getGoldRatesInDatesRange(startDate, stopDate, unit);
 		}
 }

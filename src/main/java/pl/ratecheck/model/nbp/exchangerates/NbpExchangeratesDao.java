@@ -1,42 +1,35 @@
 package pl.ratecheck.model.nbp.exchangerates;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import pl.ratecheck.model.CurrencyCode;
 import pl.ratecheck.model.ExchangeratesDao;
+import pl.ratecheck.model.PriceType;
 import pl.ratecheck.model.Rate;
-import pl.ratecheck.model.nbp.NoDataExeption;
 
 @Repository
 public class NbpExchangeratesDao implements ExchangeratesDao {
 	@Autowired
-	private NbpExchangeratesProvider urlProvider;
+	private NbpExchangeratesProvider ratesProvider;
 
 	public NbpExchangeratesDao() {
 	}
 
 	@Override
-	public List<? extends Rate> getRatesInDatesRange(LocalDate startDate, LocalDate stopDate,
-			CurrencyCode currencyCode, String price) {
-		List<NbpExchangerate> ratesList;
-		try {
-			ratesList = urlProvider.provideRatesList(startDate, stopDate, currencyCode);
-		} catch (NoDataExeption e) {
-			e.printStackTrace();
-			return null;
-		}
-		List<Rate> resultRates = new LinkedList<Rate>();
-		ratesList.stream().map(exchangerate -> priceMapper(price, exchangerate)).forEach(resultRates::add);
+	public List<? extends Rate> getRatesInDatesRange(LocalDate startDate, LocalDate stopDate, CurrencyCode currencyCode, PriceType price) {
+		List<NbpExchangerate> ratesList = ratesProvider.provideRatesList(startDate, stopDate, currencyCode);
 
-		return resultRates;
+		return ratesList.stream()
+				 .map(exchangerate -> mapToOnePriceTypeRate(price, exchangerate))
+				 .collect(Collectors.toList());
 	}
 
-	private Rate priceMapper(String price, NbpExchangerate exchangerate) {
+	private Rate mapToOnePriceTypeRate(PriceType price, NbpExchangerate exchangerate) {
 		
 		return new Rate(){
 			
@@ -52,11 +45,7 @@ public class NbpExchangeratesDao implements ExchangeratesDao {
 
 			@Override
 			public Double getValue() {
-				if(price.equalsIgnoreCase("ask")) {
-					return exchangerate.getAsk();
-				}else {
-					return exchangerate.getBid();
-				}
+				return price.equals(PriceType.ASK) ? exchangerate.getAsk() : exchangerate.getBid();
 			}
 
 			@Override

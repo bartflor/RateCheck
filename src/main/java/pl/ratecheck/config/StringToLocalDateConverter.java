@@ -8,7 +8,6 @@ public class StringToLocalDateConverter implements Converter<String, LocalDate> 
 
 	@Override
 	public LocalDate convert(String source) {
-		System.out.println("conv");
 		return LocalDate.parse(source);
 	}
 
