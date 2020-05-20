@@ -4,13 +4,13 @@
 * [Setup](#setup)
 
 ## General info
-This project is Spring web application, that allows to check exchange rates and gold price. Data came from NBP server is JSON format, provided from web API. You can check current prices, or plot history data from range available at NBP site. 
-Project is still developed. Tests needs to be created. 
+This project is Spring web application, that allows to check exchange rates and gold price. Data came from NBP server is JSON format, provided from web API. You can check current prices, or plot history data from range available at NBP site.  
+Project is still developed. More tests needs to be created. 
 	
 ## Technologies
 Project is created with:
 * Spring framework
-* Junit
+* Junit + Mockito
 * Maven
 * Jackson lib
 * Thymeleaf
