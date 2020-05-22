@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +35,20 @@ public class NbpTodayRatesProvider {
 
 	public NbpGoldRate checkTodayGoldRates() {
 		List<NbpGoldRate> rates = goldRatesProvider.getGoldRatesListFromUrl(NBP_TODAY_GOLD_RATE_URL);
-		return rates.size() == 1 ? rates.get(0) : new NbpGoldRate();
+		return rates.isEmpty() ? new NbpGoldRate() : rates.get(0);
 	}
 
-	public List<NbpTodayExchangerate> chceckTodayExchangeRates() {
+	public List<NbpTodayExchangerate> checkTodayExchangeRates() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		NbpRatesToMap[] rates;
 		try {
 			rates = mapper.readValue(NBP_TODAY_EXCHANGERATES_URL, NbpRatesToMap[].class);
-			return rates[0].getRates();
+			return rates.length > 0 ? rates[0].getRates() : Collections.emptyList();
 		} catch (IOException e) {
-			// TODO: handle IO ex
 			e.printStackTrace();
+			return Collections.emptyList();
 		}
-		return null;
 	}
 
 }

@@ -11,9 +11,8 @@ public class NbpTodayRatesDao {
 	}
 
 	public NbpTodayRates getTodayRates() {
-
 		NbpTodayRates rates = new NbpTodayRates();
-		rates.setTodayExchangeRates(ratesProvider.chceckTodayExchangeRates());
+		rates.setTodayExchangeRates(ratesProvider.checkTodayExchangeRates());
 		rates.setTodayGoldRate(ratesProvider.checkTodayGoldRates());
 		return rates;
 	}

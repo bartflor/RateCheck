@@ -18,7 +18,6 @@ public class NbpGoldRate implements Rate{
 
 	
 	public NbpGoldRate(LocalDate date, Double value) {
-		super();
 		this.date = date;
 		this.value = value;
 	}

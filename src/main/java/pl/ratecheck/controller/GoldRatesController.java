@@ -34,7 +34,7 @@ public class GoldRatesController {
 		} else {
 			return "findgoldrates";
 		}
-		if(rates == null) {
+		if(rates == null || rates.isEmpty()) {
 			model.addAttribute("error", "No rates in selected dates range.");
 			return "findgoldrates";
 		} 
